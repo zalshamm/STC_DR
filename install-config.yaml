@@ -1,0 +1,38 @@
+apiVersion: v1
+baseDomain: .stc.com.sa
+proxy:
+  httpProxy: http://css:Secret%40Kpr0d13@proxy.stc.com.sa:8080 
+  httpsProxy: http://css:Secret%40Kpr0d13@proxy.stc.com.sa:8080
+  noProxy: 10.18.86.0/24
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata:
+  name: ocp-dr
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14 
+    hostPrefix: 23
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere: 
+    datacenter: STCDDC01
+    defaultDatastore: nvme05
+    folder: /STCDDC01/vm/DR_DDC_OCP-TNR-Prod01
+    diskType: thin
+    password: XRleqUHdx9N0ffuw7Qg=
+    username: ocpprod@stc.com.sa
+    vCenter: 10.18.50.2
+fips: false
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfYTE4OTJlYWIxOWJhNDI5Y2FmNjk2ZTM1NzlkMGU3MDA6OVozQUVIUktaTUpDMFA1RlNEVE9DNFo0WkczT0VDOFowUFI0VlM1N0NIQ1kzM0RHWjJZVjA0ODM0VEY0VUlSMw==","email":"aaashraf.c@stc.com.sa"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfYTE4OTJlYWIxOWJhNDI5Y2FmNjk2ZTM1NzlkMGU3MDA6OVozQUVIUktaTUpDMFA1RlNEVE9DNFo0WkczT0VDOFowUFI0VlM1N0NIQ1kzM0RHWjJZVjA0ODM0VEY0VUlSMw==","email":"aaashraf.c@stc.com.sa"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLTJlNDY3Mjg1LWJhMzktNDkxOS1hMDMxLTMxZTQ2ODI3NTUwYjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTBOakkyWVRVMVpXRTJOemcwTldWa1lUWmxOalpsTXpjeE1UazRaVFUzWXlKOS5FTmFEUHRndDlIRUZGVy1oc29LZ0pSTXp0OU9yX1RSNGIyWjJ4U1Vsc2VtZXNXS3RVeE1nZXBpY2lQSUVZSHFQR1lNdXF2WkYxZ0dQTlJqc1ZSRjZTQlpGM29NZ1otemFweXZjdUhwNkhVSzdIaFpyQk91aFJXTmQ5VXpMX1oxeUtKalJPYzlmNW1nNkVKZS13T2ttVkQ3RUZieGtuamcxeXQyd293cERCTjJPX1dyUGRPZkVEOXNHRnd0Snp2YkZRRm9WNWxnUWlERFRPZHFWdnJWQ3RYazdMRjJyclpLeG12YmpFa0xXSk5xaU90ZkR3dVY3TjJ2OS11ZWFXaE9KcFJfVUU0dDl0LTVCZktZVGV5SzFOSENxMmc0aEZkUVdINzZkdnR5em1rZDlLdWVpOTBxX0tpYmp2alROSWd5U0F0RFdqUmxvME5ndTIzU2JPQVhiajd5Tk5xSmRXZHVndXJldlF4elBSVmJNRGFsV0QwM3BWVFFVZ3J5LU5QZTcwNWRMdEJuNEU5d0N2Vy1rV3RFcUdyTFkxQjFFTjdhamNncWZUWGdOR3k0ZzNpSDhIaHBKN0NMNmNLaUlsdmRQZzk0OVpoS2hSYUt4RkFOTVJKSElvUXdscWlvd2Q0MkwwdE9mbEhhdHBUQlhadWo0dWtQLUQxbE9BMkdSMWNHN3ZTbGc3T21vVVgwZ1BlRGhMbDE1a2M2RndjbHlrT1o5aTdmR2Y0cC1KRG9hMnRzTEZxNk9lQ24wMXF3WHNaRDBUU2lZdDVzb3B6Z1BYZkdrcUhHYzNmbFZHQWVObTJBX3c1MEh5bEdNS3F6RVN6Y0VDMjdTOHZMbjNrZVJlU0V6MUFNN05UZVUydkZBTUxua3pGallER09pRmJZYXp0V09HVWt1VnVkRXhCQQ==","email":"aaashraf.c@stc.com.sa"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLTJlNDY3Mjg1LWJhMzktNDkxOS1hMDMxLTMxZTQ2ODI3NTUwYjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTBOakkyWVRVMVpXRTJOemcwTldWa1lUWmxOalpsTXpjeE1UazRaVFUzWXlKOS5FTmFEUHRndDlIRUZGVy1oc29LZ0pSTXp0OU9yX1RSNGIyWjJ4U1Vsc2VtZXNXS3RVeE1nZXBpY2lQSUVZSHFQR1lNdXF2WkYxZ0dQTlJqc1ZSRjZTQlpGM29NZ1otemFweXZjdUhwNkhVSzdIaFpyQk91aFJXTmQ5VXpMX1oxeUtKalJPYzlmNW1nNkVKZS13T2ttVkQ3RUZieGtuamcxeXQyd293cERCTjJPX1dyUGRPZkVEOXNHRnd0Snp2YkZRRm9WNWxnUWlERFRPZHFWdnJWQ3RYazdMRjJyclpLeG12YmpFa0xXSk5xaU90ZkR3dVY3TjJ2OS11ZWFXaE9KcFJfVUU0dDl0LTVCZktZVGV5SzFOSENxMmc0aEZkUVdINzZkdnR5em1rZDlLdWVpOTBxX0tpYmp2alROSWd5U0F0RFdqUmxvME5ndTIzU2JPQVhiajd5Tk5xSmRXZHVndXJldlF4elBSVmJNRGFsV0QwM3BWVFFVZ3J5LU5QZTcwNWRMdEJuNEU5d0N2Vy1rV3RFcUdyTFkxQjFFTjdhamNncWZUWGdOR3k0ZzNpSDhIaHBKN0NMNmNLaUlsdmRQZzk0OVpoS2hSYUt4RkFOTVJKSElvUXdscWlvd2Q0MkwwdE9mbEhhdHBUQlhadWo0dWtQLUQxbE9BMkdSMWNHN3ZTbGc3T21vVVgwZ1BlRGhMbDE1a2M2RndjbHlrT1o5aTdmR2Y0cC1KRG9hMnRzTEZxNk9lQ24wMXF3WHNaRDBUU2lZdDVzb3B6Z1BYZkdrcUhHYzNmbFZHQWVObTJBX3c1MEh5bEdNS3F6RVN6Y0VDMjdTOHZMbjNrZVJlU0V6MUFNN05UZVUydkZBTUxua3pGallER09pRmJZYXp0V09HVWt1VnVkRXhCQQ==","email":"aaashraf.c@stc.com.sa"}}}'
+sshKey: >
+   ssh-ed25519 
+   AAAAC3NzaC1lZDI1NTE5AAAAIMktAU1d/kL5hxnKlA895mNtIN8w6MTp36iRWoQSWQMj
+   root@helper
